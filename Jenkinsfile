@@ -18,8 +18,9 @@ pipeline {
         choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     } */
-      stages('Read Version') {
-       steps {
+      stages {
+         stage ('Read Version') {
+          steps {
            script {
             def packageJson = readJSON file: 'package.json'
             appVersion = packageJson.version
