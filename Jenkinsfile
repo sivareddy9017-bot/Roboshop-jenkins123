@@ -5,7 +5,7 @@ pipeline {
         } 
     }
     environment {
-        appVesrion = ""
+        appVersion = ""
     }
     options {
         // disableConcurrentBuilds()
@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script{
                     
-                       def packageJson = readJson file: 'package.json'
+                       def packageJson = readJson file:'package.json'
                        appVersion = packageJson.version
                        echo "Building version ${appVersion}"  
                     
@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script{
                     sh """
-                       docker build -t catalogue: ${ appVersion } .
+                       docker build -t catalogue:${appVersion} .
                     """
                 }
             }
