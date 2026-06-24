@@ -30,11 +30,11 @@ pipeline {
                 }
             }
         }
-        stage('Install Dependencied') {
+        stage('Install Dependencies') {
             steps {
                 script{
                     sh """
-                        
+                        npm install
                     """
                 }
             }
@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script{
                     sh """
-                       docker build -t catalogue: ${ appVersion } 
+                       docker build -t catalogue: ${ appVersion } .
                     """
                 }
             }
