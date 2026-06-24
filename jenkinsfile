@@ -30,18 +30,25 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
+        stage('Install Dependencied') {
             steps {
                 script{
                     sh """
-                        echo "Building"
-                        echo $COURSE
-                        sleep 10
+                        
                     """
                 }
             }
         }
-        stage('Test') {
+        stage('Build Image') {
+            steps {
+                script{
+                    sh """
+                       docker build -t catalogue: ${ appVersion } 
+                    """
+                }
+            }
+        }
+        /* stage('Test') {
             steps {
                script{
                     sh """
@@ -54,8 +61,8 @@ pipeline {
                     """
                 }
             }
-        }
-        stage('Deploy') {
+        } */
+        /* stage('Deploy') {
             when {
                 expression { "${params.DEPLOY}" == "true" }
             }
@@ -67,7 +74,7 @@ pipeline {
                 parameters {
                     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
                 }
-            } */
+            } 
             steps {
                 script{
                     sh """
@@ -75,7 +82,7 @@ pipeline {
                     """
                 }
             }
-        }
+        } */
     }
 
     // post build
