@@ -84,6 +84,7 @@ pipeline {
             }
         } */
     }
+}
 
     // post build
     post { 
@@ -97,4 +98,4 @@ pipeline {
             echo "pipeline failure"
         }
     }
-}
+
