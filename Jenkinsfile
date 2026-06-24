@@ -18,18 +18,15 @@ pipeline {
         choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     } */
-    stages {
-        stage('Read Vesrion') {
-            steps {
-                script{
-                    
-                       def packageJson = readJson file:'package.json'
-                       appVersion = packageJson.version
-                       echo "Building version ${appVersion}"  
-                    
-                }
-            }
+      stage('Read Version') {
+       steps {
+           script {
+            def packageJson = readJSON file: 'package.json'
+            appVersion = packageJson.version
+            echo "Building version ${appVersion}"
         }
+    }
+}
         stage('Install Dependencies') {
             steps {
                 script{
