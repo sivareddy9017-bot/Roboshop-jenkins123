@@ -20,33 +20,45 @@ pipeline {
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     } */
       stages {
-         stage ('Read Version') {
-          steps {
-           script {
-            def packageJson = readJSON file: 'package.json'
-            appVersion = packageJson.version
-            echo "Building version ${appVersion}"
+        stage('Read version'){
+            steps {
+                script {
+                    // Load and parse the JSON file
+                    def packageJson = readJSON file: 'package.json'
+                    
+                    // Access fields directly
+                    appVersion = packageJson.version
+                    echo "Building version ${appVersion}"
+                }
+            }
         }
-    }
-}
         stage('Install Dependencies') {
             steps {
                 script{
                     sh """
-                       npm install
-                      """
+                        npm install
+                    """
+                }
+            }
+        }
+        stage('Unit tests') {
+            steps {
+                script{
+                    sh """
+                        npm test
+                    """
                 }
             }
         }
         stage ('SonarQube Analysis'){
-           steps {
-               script {
-                   def scannerHome = tool name: 'Sonar 8.0' // agent configuration
-                   withSonarQubeEnv('Sonar 8.0') {  // analysing and updating the server
-                     sh "${scannerHome}/bin/sonar-scanner"
-                   }
-               }
-           } 
+            steps {
+                script {
+                    def scannerHome = tool name: 'sonar-8' // agent configuration
+                    withSonarQubeEnv('sonar-server') { // analysing and uploading to server
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+            }
         }
         stage('Build Image') {
             steps {
