@@ -1,14 +1,14 @@
 @Library('Jenkins-shared-library') _
 
 def configMap = [
-    project ="roboshop"
+    project: "roboshop",
     component: "catalogue"
 ]
 
-echo "Trihggring the library pipeline"
-if (env.BRANCH_NAME.equalsIgnoreCase('main')){
-     echo "checking later"
-}
-else{
-    testPipeline(configMap)
+echo "Triggering the shared library pipeline"
+
+if (env.BRANCH_NAME.equalsIgnoreCase('main')) {
+    echo "Main branch"
+} else {
+    testpipeline(configMap)
 }
