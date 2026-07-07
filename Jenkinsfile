@@ -1,8 +1,8 @@
 @Library('Jenkins-shared-library') _
 
 def configMap = [
-    project ="roboshop"
-    component: "catalogue"
+    project ="nandyala-siva"
+    component: "ROBOSHOP-JENKINS123"
 ]
 
 echo "Trihggring the library pipeline"
@@ -12,3 +12,4 @@ if (env.BRANCH_NAME.equalsIgnoreCase('main')){
 else{
     testPipeline(configMap)
 }
+
