@@ -6,10 +6,9 @@ def configMap = [
 ]
 
 echo "Trihggring the library pipeline"
-if (env.BRANCH_NAME.equalsIgnoreCase('main')){
-     echo "checking later"
-}
-else{
-    testPipeline(configMap)
+if ("main".equalsIgnoreCase(env.BRANCH_NAME ?: "")) {
+    echo "checking later"
+} else {
+    testpipeline(configMap)
 }
 
